@@ -35,8 +35,7 @@ namespace ShowAuthorsConsole
                 author.Name,
                 AverageBook = authors.Average(a => a.Books.Count())
 
-            });
-            ////PrintAuthors(averageBook);
+            }); 
             Console.WriteLine(averageBook.First());
 
             Console.WriteLine("----------------------------------------------------------");
@@ -47,7 +46,6 @@ namespace ShowAuthorsConsole
                 .OrderByDescending(book => book.Title.Length)
                 .ThenBy(book => book.ID);
 
-            //PrintAuthors(allBooks);
             var first = allBooks.First();
             Console.WriteLine($" ID:{first.ID} => Title:{first.Title} => Length:{first.Title.Count()}");
 
@@ -62,11 +60,10 @@ namespace ShowAuthorsConsole
 
             }).OrderBy(book => book.ShortTitle).ToList();
 
-            //PrintAuthors(shortestTitle);
             Console.WriteLine(shortestTitle.First());
 
             Console.WriteLine("----------------------------------------------------------");
-            Console.WriteLine("***4.Author who has the shortest average title for a book:\n " +
+            Console.WriteLine("***4.Author who has the shortest average title for a book:\n " 
                 "(Discount authors with less than three books)");
 
             var shortestAverage = authors
@@ -78,7 +75,6 @@ namespace ShowAuthorsConsole
                     ShortestAverage = a.Books.Average(b => b.Title.Length)
                 }).OrderBy(b => b.ShortestAverage);
 
-            ////PrintAuthors(shortestTitle);
             Console.WriteLine(shortestAverage.First());
 
             Console.WriteLine("----------------------------------------------------------");
@@ -90,7 +86,6 @@ namespace ShowAuthorsConsole
                .Select(book => new { book.Key, Count = book.Count() })
                .OrderByDescending(book => book.Count);
 
-            // PrintAuthors(authorsByLetter);
             Console.WriteLine(authorsByLetter.First());//First is a empty string;
             Console.WriteLine(authorsByLetter.Skip(1).First());
 
@@ -102,7 +97,6 @@ namespace ShowAuthorsConsole
                 .GroupBy(book => book.Year)
                 .OrderByDescending(book => book.Count());
 
-            // PrintAuthors(authorsByLetter);
             var firstYear = mostPublishedYear.First();
             Console.WriteLine($"In {firstYear.Key} year has the most published books: {firstYear.Count()} books");
 
@@ -127,7 +121,6 @@ namespace ShowAuthorsConsole
                 NumbersOfDiffSeries = a.Books.GroupBy(b => b.Series).Distinct().Count()
             }).OrderByDescending(b => b.NumbersOfDiffSeries).ThenBy(b => b.Name);
 
-            //PrintAuthors(authorWithDiffSeries);
             Console.WriteLine(authorWithDiffSeries.First());//There are two authors with the same number od different series;
             Console.WriteLine(authorWithDiffSeries.Skip(1).First());
 
@@ -141,7 +134,6 @@ namespace ShowAuthorsConsole
                 BookWithSerie = author.Books.Where(book => !string.IsNullOrEmpty(book.Series)).Count()
             }).OrderByDescending(author => author.BookWithSerie);
 
-            ////PrintAuthors(authorWithDiffSeries);
             Console.WriteLine(booksWithSeries.First());
 
             Console.WriteLine("----------------------------------------------------------");
@@ -154,7 +146,6 @@ namespace ShowAuthorsConsole
                 Sub = a.Books.Select(b => b.Year).Max() - a.Books.Select(b => b.Year).Min()
             }).OrderByDescending(a => a.Sub);
 
-            // PrintAuthors(longestCarrer);
             Console.WriteLine(longestCarrer.First());
 
 
@@ -176,22 +167,31 @@ namespace ShowAuthorsConsole
                     book.Title,
                     Author = authors.Where(author => author.Books.Contains(book)).First().Name
 
-                }).GroupBy(book => book.Title).OrderByDescending(book => book.Count()).First();
+                }).GroupBy(book => book.Title).OrderByDescending(book => book.Count());
 
-            Console.WriteLine($" Series: {mostAuthorsSeries.Key} => NumberOfAuthors:{mostAuthorsSeries.Count()}");
+            var firstSeries = mostAuthorsSeries.First();
+            Console.WriteLine($" Series: {firstSeries.Key} => NumberOfAuthors:{firstSeries.Count()}");
 
             Console.WriteLine("----------------------------------------------------------");
             Console.WriteLine("***2.In Which year most authors published a book:");
 
             var yearMostPublished = authors
-                .SelectMany(author => author.Books)
-                .GroupBy(book => book.Year)
-                .Select(g => g.Key)
-                .Select(x => new {x, Authors = authors.Select(a => new { Years = a.Books.Select(b => b.Year).Distinct()})
-                                                      .Where(a => a.Years.Contains(x))})
-                                                      .OrderByDescending(y => y.Authors.Count()).First(); 
+                 .SelectMany(author => author.Books)
+                 .GroupBy(book => book.Year)
+                 .Select(year => year.Key)
+                 .Select(year => new
+                 {
+                     Year = year,
+                     NumberOfAuthors = authors.Select(author => new
+                     {
+                         Years = author.Books.Select(book => book.Year).Distinct()
 
-            Console.WriteLine($" {yearMostPublished.x} year : {yearMostPublished.Authors.Count()} authors ");
+                     }).Where(a => a.Years.Contains(year))
+                 }).OrderByDescending(x => x.NumberOfAuthors.Count());
+
+            var firstMostPublishedYear = yearMostPublished.First();
+            Console.WriteLine($"{firstMostPublishedYear.Year}Year => {firstMostPublishedYear.NumberOfAuthors.Count()} authors ");
+
 
             Console.WriteLine("----------------------------------------------------------");
             Console.WriteLine("***3.Which author has the highest average books per year:");
@@ -208,29 +208,10 @@ namespace ShowAuthorsConsole
             Console.WriteLine("----------------------------------------------------------");
             Console.WriteLine("***4.How long is the longest hiatus between two books for an author, and by whom:");
 
-            var theLongestHiatus = authors.Select(a => new
-            {
-                a.Name,
-                Hiatus = LongestHiatusBetweenTwoBooks(a.Books.OrderByDescending(b => b.Year).Select(x => x.Year).ToList())
-            }).OrderByDescending(a => a.Hiatus);
-
-            var firstBreak = theLongestHiatus.First();
-            Console.WriteLine($"Author with biggest break is {firstBreak}");
 
             Console.ReadLine();
         }
-        static int LongestHiatusBetweenTwoBooks(List<int> years)
-        {
-            int max = 0;
-            for (int i = 0; i < years.Count(); i++)
-            {
-                if (i == years.Count() - 1)
-                    break;
-                if (max < years[i] - years[i + 1])
-                    max = years[i] - years[i + 1];
-            }
-            return max;
-        }
+        
 
         static void PrintAuthors<T>(IEnumerable<T> authors)
         {
