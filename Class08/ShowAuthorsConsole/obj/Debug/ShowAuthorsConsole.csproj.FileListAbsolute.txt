@@ -1,0 +1,14 @@
+C:\Users\Stojmilova\Desktop\Homework - Class08-LINQ\Class08\ShowAuthorsConsole\bin\Debug\authors.json
+C:\Users\Stojmilova\Desktop\Homework - Class08-LINQ\Class08\ShowAuthorsConsole\bin\Debug\ShowAuthorsConsole.exe.config
+C:\Users\Stojmilova\Desktop\Homework - Class08-LINQ\Class08\ShowAuthorsConsole\bin\Debug\ShowAuthorsConsole.exe
+C:\Users\Stojmilova\Desktop\Homework - Class08-LINQ\Class08\ShowAuthorsConsole\bin\Debug\ShowAuthorsConsole.pdb
+C:\Users\Stojmilova\Desktop\Homework - Class08-LINQ\Class08\ShowAuthorsConsole\bin\Debug\BooksProvider.dll
+C:\Users\Stojmilova\Desktop\Homework - Class08-LINQ\Class08\ShowAuthorsConsole\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Stojmilova\Desktop\Homework - Class08-LINQ\Class08\ShowAuthorsConsole\bin\Debug\BooksProvider.pdb
+C:\Users\Stojmilova\Desktop\Homework - Class08-LINQ\Class08\ShowAuthorsConsole\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\Stojmilova\Desktop\Homework - Class08-LINQ\Class08\ShowAuthorsConsole\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Stojmilova\Desktop\Homework - Class08-LINQ\Class08\ShowAuthorsConsole\obj\Debug\ShowAuthorsConsole.csprojAssemblyReference.cache
+C:\Users\Stojmilova\Desktop\Homework - Class08-LINQ\Class08\ShowAuthorsConsole\obj\Debug\ShowAuthorsConsole.csproj.CoreCompileInputs.cache
+C:\Users\Stojmilova\Desktop\Homework - Class08-LINQ\Class08\ShowAuthorsConsole\obj\Debug\ShowAuthorsConsole.csproj.CopyComplete
+C:\Users\Stojmilova\Desktop\Homework - Class08-LINQ\Class08\ShowAuthorsConsole\obj\Debug\ShowAuthorsConsole.exe
+C:\Users\Stojmilova\Desktop\Homework - Class08-LINQ\Class08\ShowAuthorsConsole\obj\Debug\ShowAuthorsConsole.pdb
